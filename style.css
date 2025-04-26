@@ -1,0 +1,387 @@
+/* --- Import Google Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Merriweather:wght@400;700&display=swap');
+
+/* --- Variabili Colori & Design Tokens --- */
+:root {
+    /* Palette Colori */
+    --primary-color: #00796b; /* Teal scuro */
+    --primary-darker: #005f56; /* Teal più scuro per hover/accenti */
+    --secondary-color: #ff9800; /* Arancione caldo */
+    --secondary-darker: #e68900; /* Arancione più scuro per hover */
+    --light-bg: #fdfdff; /* Sfondo principale leggermente off-white */
+    --white-bg: #ffffff; /* Sfondo contenitore */
+    --dark-text: #212529; /* Testo principale scuro */
+    --medium-text: #555b61; /* Testo secondario/medio */
+    --light-text: #ffffff; /* Testo su sfondi scuri */
+    --border-color: #e0e0e0; /* Colore bordi sottili */
+    --shadow-color-light: rgba(0, 0, 0, 0.08); /* Ombra leggera */
+    --shadow-color-medium: rgba(0, 0, 0, 0.12); /* Ombra media */
+
+    /* Tipografia */
+    --font-body: 'Poppins', sans-serif;
+    --font-heading: 'Merriweather', serif;
+    --base-font-size: 16px; /* Imposta la base per i rem */
+    --line-height-body: 1.8;
+    --line-height-heading: 1.4;
+
+    /* Spaziature (base 8px) */
+    --space-xs: 0.5rem;  /* 8px */
+    --space-s: 1rem;    /* 16px */
+    --space-m: 1.5rem;  /* 24px */
+    --space-l: 2rem;    /* 32px */
+    --space-xl: 2.5rem; /* 40px */
+    --space-xxl: 3rem;  /* 48px */
+
+    /* Bordi e Ombre */
+    --border-radius-small: 4px;
+    --border-radius-medium: 8px;
+    --border-radius-large: 12px;
+    --box-shadow-light: 0 2px 8px var(--shadow-color-light);
+    --box-shadow-medium: 0 4px 15px var(--shadow-color-medium);
+}
+
+/* --- Reset Base & Stili Globali --- */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: var(--base-font-size); /* Imposta la base per i rem */
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    font-weight: 300;
+    line-height: var(--line-height-body);
+    background-color: var(--light-bg);
+    color: var(--dark-text);
+    overflow-x: hidden;
+}
+
+/* --- Intestazione Globale --- */
+.main-header {
+    background: linear-gradient(95deg, var(--primary-color) 0%, var(--primary-darker) 100%);
+    color: var(--light-text);
+    padding: var(--space-s) 0;
+    text-align: center;
+    box-shadow: 0 3px 8px var(--shadow-color-medium);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.main-header h1 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: clamp(1.8rem, 5vw, 2.5rem); /* Responsive font size */
+    margin-bottom: var(--space-s);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25);
+}
+
+/* --- Navigazione Globale --- */
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0 var(--space-xs);
+}
+
+.main-nav li {
+    margin: var(--space-xs) var(--space-s);
+}
+
+.main-nav a {
+    color: rgba(255, 255, 255, 0.85); /* Bianco leggermente trasparente */
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 0.95rem;
+    padding: var(--space-xs) var(--space-s);
+    border-radius: var(--border-radius-small);
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    position: relative; /* Per pseudo-elementi */
+    overflow: hidden; /* Per effetti di sfondo */
+}
+
+.main-nav a::before { /* Effetto underline animato */
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: var(--secondary-color);
+    transition: all 0.35s ease;
+    transform: translateX(-50%);
+}
+
+.main-nav a:hover::before,
+.main-nav a.active::before {
+    width: 70%; /* Larghezza underline su hover/active */
+}
+
+
+.main-nav a:hover {
+     color: var(--light-text);
+     background-color: rgba(255, 255, 255, 0.1);
+}
+
+.main-nav a.active {
+    color: var(--light-text);
+    font-weight: 600;
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* --- Contenitore Principale della Pagina --- */
+.page-container {
+    max-width: 950px;
+    margin: var(--space-xl) auto;
+    padding: var(--space-l) var(--space-xl);
+    background-color: var(--white-bg);
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--box-shadow-medium);
+    /* Animazione ingresso */
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* --- Titoli delle Sezioni (H2) --- */
+.page-container h2 {
+    font-family: var(--font-heading);
+    color: var(--primary-color);
+    font-size: clamp(1.7rem, 4vw, 2.1rem); /* Responsive */
+    font-weight: 700;
+    line-height: var(--line-height-heading);
+    margin-bottom: var(--space-l);
+    padding-bottom: var(--space-s);
+    border-bottom: 3px solid var(--secondary-color);
+    /* Animazione ingresso */
+    animation: slideInLeft 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s forwards;
+    opacity: 0; /* Nascosto inizialmente */
+}
+
+/* --- Paragrafi e Liste --- */
+.page-container p,
+.page-container ul {
+    margin-bottom: var(--space-m);
+    font-size: 1.05rem;
+    color: var(--medium-text);
+    /* Animazione ingresso */
+    animation: fadeInUp 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s forwards;
+    opacity: 0; /* Nascosto inizialmente */
+}
+
+.page-container ul {
+    list-style-type: '✓ '; /* Custom bullet point */
+    padding-left: var(--space-m);
+}
+
+.page-container li {
+    margin-bottom: var(--space-s);
+    padding: var(--space-xs) 0;
+    transition: background-color 0.3s ease; /* Transizione per hover */
+    border-radius: var(--border-radius-small);
+    /* Animazione ingresso elementi lista */
+    animation: fadeInUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    opacity: 0;
+}
+.page-container li:hover {
+    background-color: #f1f1f1; /* Sfondo leggero su hover */
+}
+
+/* Applica ritardo crescente agli elementi della lista */
+.page-container li:nth-child(1) { animation-delay: 0.5s; }
+.page-container li:nth-child(2) { animation-delay: 0.6s; }
+.page-container li:nth-child(3) { animation-delay: 0.7s; }
+.page-container li:nth-child(4) { animation-delay: 0.8s; }
+.page-container li:nth-child(5) { animation-delay: 0.9s; }
+/* Continua se ci sono più elementi */
+
+/* Stili specifici per la sezione Approfondimenti */
+#approfondimenti ul {
+    list-style-type: '📚 '; /* Icona libro */
+}
+
+
+/* --- Stili Specifici (Grassetto, Corsivo) --- */
+strong {
+    font-weight: 600;
+    color: var(--primary-darker); /* Teal più scuro per forte enfasi */
+}
+
+em { /* Per titoli di opere */
+    font-style: italic;
+    color: var(--medium-text);
+    font-weight: 400; /* Assicura non sia troppo bold */
+}
+
+/* --- Navigazione tra Pagine (Pulsanti Prev/Next) --- */
+.page-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: var(--space-xl);
+    padding-top: var(--space-l);
+    border-top: 1px solid var(--border-color);
+    /* Animazione ingresso */
+    animation: fadeInUp 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1s forwards;
+    opacity: 0; /* Nascosto inizialmente */
+}
+
+.nav-button {
+    display: inline-flex; /* Per allineare testo/icona se ci fosse */
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-s) var(--space-l);
+    background-color: var(--secondary-color);
+    color: var(--light-text);
+    text-decoration: none;
+    border-radius: 50px; /* Pill shape */
+    font-weight: 600;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: var(--box-shadow-light);
+    min-width: 120px; /* Larghezza minima */
+    text-align: center;
+}
+
+.nav-button:hover {
+    background-color: var(--secondary-darker);
+    transform: translateY(-3px) scale(1.03); /* Leggero sollevamento e ingrandimento */
+    box-shadow: var(--box-shadow-medium);
+}
+
+.nav-button.prev {
+    background-color: var(--medium-text); /* Grigio per "Indietro" */
+}
+
+.nav-button.prev:hover {
+    background-color: #444;
+}
+
+/* Nasconde il contenitore del pulsante se non c'è link */
+.nav-button-container.hidden {
+    visibility: hidden;
+    pointer-events: none; /* Impedisce interazione */
+}
+
+
+/* --- Footer Globale --- */
+.main-footer {
+    text-align: center;
+    margin-top: var(--space-xxl);
+    padding: var(--space-l);
+    font-size: 0.9rem;
+    color: var(--medium-text);
+    border-top: 1px solid var(--border-color);
+    background-color: #f1f1f1; /* Sfondo leggermente diverso per il footer */
+}
+
+/* --- Animazioni Keyframes --- */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* --- Media Queries per Responsive Design --- */
+@media (max-width: 992px) {
+    .page-container {
+        max-width: 90%; /* Più largo su tablet */
+    }
+}
+
+@media (max-width: 768px) {
+    html {
+        font-size: 15px; /* Leggermente più piccolo su mobile */
+    }
+    .main-header h1 {
+        margin-bottom: var(--space-xs);
+    }
+    .main-nav ul {
+       justify-content: center;
+    }
+     .main-nav li {
+        margin: var(--space-xs) 0.5rem; /* Meno margine laterale */
+    }
+    .main-nav a {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.9rem;
+    }
+    .main-nav a::before { /* Rimuove o riduce underline su mobile se troppo invadente */
+        height: 1px;
+        width: 0; /* Nasconde underline */
+    }
+    .main-nav a:hover::before, .main-nav a.active::before {
+         width: 0;
+    }
+    .main-nav a.active { /* Evidenzia con sfondo */
+         background-color: rgba(255, 255, 255, 0.2);
+    }
+
+
+    .page-container {
+        margin: var(--space-l) var(--space-s);
+        padding: var(--space-m) var(--space-l);
+        border-radius: var(--border-radius-medium);
+    }
+    .page-container h2 {
+        margin-bottom: var(--space-m);
+        padding-bottom: var(--space-xs);
+    }
+
+    .page-navigation {
+        flex-direction: column;
+        align-items: stretch; /* Pulsanti a larghezza piena */
+    }
+    .nav-button {
+        width: 100%;
+        margin-bottom: var(--space-s);
+        padding: var(--space-s) var(--space-m);
+        font-size: 0.95rem;
+    }
+     .nav-button-container:last-child .nav-button {
+         margin-bottom: 0;
+     }
+}
+
+@media (max-width: 480px) {
+    html {
+        font-size: 14px;
+    }
+    .page-container {
+         padding: var(--space-m);
+    }
+     .main-nav li {
+        margin: var(--space-xs) 0.3rem;
+    }
+     .main-nav a {
+        padding: 0.3rem 0.5rem;
+        font-size: 0.85rem;
+    }
+}
