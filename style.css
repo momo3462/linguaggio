@@ -1,43 +1,47 @@
 /* --- Import Google Fonts --- */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Merriweather:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@700;900&display=swap');
 
 /* --- Variabili Colori & Design Tokens --- */
 :root {
-    /* Palette Colori */
-    --primary-color: #00796b; /* Teal scuro */
-    --primary-darker: #005f56; /* Teal più scuro per hover/accenti */
-    --secondary-color: #ff9800; /* Arancione caldo */
-    --secondary-darker: #e68900; /* Arancione più scuro per hover */
-    --light-bg: #fdfdff; /* Sfondo principale leggermente off-white */
-    --white-bg: #ffffff; /* Sfondo contenitore */
-    --dark-text: #212529; /* Testo principale scuro */
-    --medium-text: #555b61; /* Testo secondario/medio */
-    --light-text: #ffffff; /* Testo su sfondi scuri */
-    --border-color: #e0e0e0; /* Colore bordi sottili */
-    --shadow-color-light: rgba(0, 0, 0, 0.08); /* Ombra leggera */
-    --shadow-color-medium: rgba(0, 0, 0, 0.12); /* Ombra media */
+    /* Nuova Palette Colori */
+    --primary-color: #5E35B1; /* Viola Intenso */
+    --primary-darker: #4527A0; /* Viola più scuro */
+    --accent-color: #FFB300; /* Ambra/Oro */
+    --accent-darker: #FFA000; /* Ambra più scuro */
+    --secondary-accent-color: #4DB6AC; /* Verde Acqua Chiaro */
+
+    --light-bg: #F5F5F5; /* Sfondo pagina generale */
+    --white-bg: #FFFFFF; /* Sfondo contenitori */
+    --dark-text: #333333;
+    --medium-text: #5F5F5F;
+    --light-text: #FFFFFF;
+
+    --border-color: #E0E0E0;
+    --shadow-color-light: rgba(0, 0, 0, 0.06);
+    --shadow-color-medium: rgba(0, 0, 0, 0.1);
 
     /* Tipografia */
-    --font-body: 'Poppins', sans-serif;
-    --font-heading: 'Merriweather', serif;
-    --base-font-size: 16px; /* Imposta la base per i rem */
-    --line-height-body: 1.8;
-    --line-height-heading: 1.4;
+    --font-body: 'Montserrat', sans-serif;
+    --font-heading-main: 'Playfair Display', serif; /* Per il titolo principale Home */
+    --font-heading-sub: 'Montserrat', sans-serif; /* Per titoli di sezione interni */
+    --base-font-size: 16px;
+    --line-height-body: 1.7;
+    --line-height-heading: 1.3;
 
-    /* Spaziature (base 8px) */
+    /* Spaziature */
     --space-xs: 0.5rem;  /* 8px */
     --space-s: 1rem;    /* 16px */
     --space-m: 1.5rem;  /* 24px */
     --space-l: 2rem;    /* 32px */
     --space-xl: 2.5rem; /* 40px */
-    --space-xxl: 3rem;  /* 48px */
+    --space-xxl: 3.5rem; /* 56px */
 
     /* Bordi e Ombre */
-    --border-radius-small: 4px;
-    --border-radius-medium: 8px;
-    --border-radius-large: 12px;
-    --box-shadow-light: 0 2px 8px var(--shadow-color-light);
-    --box-shadow-medium: 0 4px 15px var(--shadow-color-medium);
+    --border-radius-small: 6px;
+    --border-radius-medium: 10px;
+    --border-radius-large: 16px;
+    --box-shadow-light: 0 3px 10px var(--shadow-color-light);
+    --box-shadow-medium: 0 6px 20px var(--shadow-color-medium);
 }
 
 /* --- Reset Base & Stili Globali --- */
@@ -48,173 +52,236 @@
 }
 
 html {
-    font-size: var(--base-font-size); /* Imposta la base per i rem */
+    font-size: var(--base-font-size);
     scroll-behavior: smooth;
 }
 
 body {
     font-family: var(--font-body);
-    font-weight: 300;
+    font-weight: 400; /* Default regular */
     line-height: var(--line-height-body);
     background-color: var(--light-bg);
     color: var(--dark-text);
     overflow-x: hidden;
-}
-
-/* --- Intestazione Globale --- */
-.main-header {
-    background: linear-gradient(95deg, var(--primary-color) 0%, var(--primary-darker) 100%);
-    color: var(--light-text);
-    padding: var(--space-s) 0;
-    text-align: center;
-    box-shadow: 0 3px 8px var(--shadow-color-medium);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-.main-header h1 {
-    font-family: var(--font-heading);
-    font-weight: 700;
-    font-size: clamp(1.8rem, 5vw, 2.5rem); /* Responsive font size */
-    margin-bottom: var(--space-s);
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25);
-}
-
-/* --- Navigazione Globale --- */
-.main-nav ul {
-    list-style: none;
     display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Assicura che il footer stia in fondo */
+}
+
+main {
+    flex-grow: 1; /* Permette al main di espandersi */
+}
+
+/* --- Stile Homepage (`index.html`) --- */
+.homepage-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
-    padding: 0 var(--space-xs);
-}
-
-.main-nav li {
-    margin: var(--space-xs) var(--space-s);
-}
-
-.main-nav a {
-    color: rgba(255, 255, 255, 0.85); /* Bianco leggermente trasparente */
-    text-decoration: none;
-    font-weight: 400;
-    font-size: 0.95rem;
-    padding: var(--space-xs) var(--space-s);
-    border-radius: var(--border-radius-small);
-    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-    position: relative; /* Per pseudo-elementi */
-    overflow: hidden; /* Per effetti di sfondo */
-}
-
-.main-nav a::before { /* Effetto underline animato */
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 0;
-    height: 2px;
-    background-color: var(--secondary-color);
-    transition: all 0.35s ease;
-    transform: translateX(-50%);
-}
-
-.main-nav a:hover::before,
-.main-nav a.active::before {
-    width: 70%; /* Larghezza underline su hover/active */
-}
-
-
-.main-nav a:hover {
-     color: var(--light-text);
-     background-color: rgba(255, 255, 255, 0.1);
-}
-
-.main-nav a.active {
+    min-height: calc(100vh - 80px); /* Altezza meno eventuale footer */
+    text-align: center;
+    padding: var(--space-l);
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-darker) 100%);
     color: var(--light-text);
-    font-weight: 600;
-    background-color: rgba(255, 255, 255, 0.15);
+    animation: backgroundPan 20s linear infinite;
+    background-size: 200% 200%;
 }
 
-/* --- Contenitore Principale della Pagina --- */
+@keyframes backgroundPan {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.main-title-home {
+    font-family: var(--font-heading-main);
+    font-weight: 900;
+    font-size: clamp(3rem, 10vw, 6rem); /* Dimensione fluida */
+    margin-bottom: var(--space-xl);
+    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
+    letter-spacing: 1px;
+    animation: fadeInDown 1s ease-out;
+}
+
+.homepage-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-m);
+    max-width: 1000px; /* Limita larghezza nav */
+    animation: fadeInUp 1s ease-out 0.5s backwards; /* 'backwards' applica stato iniziale */
+}
+
+.nav-button-home {
+    background-color: var(--accent-color);
+    color: var(--dark-text);
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    padding: var(--space-s) var(--space-m);
+    border-radius: var(--border-radius-large); /* Molto arrotondato */
+    box-shadow: var(--box-shadow-light), 0 0 0 3px transparent; /* Aggiunge spazio per outline */
+    transition: all 0.3s ease;
+    min-width: 200px; /* Larghezza minima per uniformità */
+    text-align: center;
+    border: 2px solid transparent;
+}
+
+.nav-button-home:hover,
+.nav-button-home:focus {
+    background-color: var(--accent-darker);
+    color: var(--white-bg);
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: var(--box-shadow-medium), 0 0 0 3px var(--white-bg); /* Effetto outline al focus/hover */
+    border-color: var(--accent-darker);
+}
+
+
+/* --- Intestazione Pagine Interne --- */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-m) var(--space-l);
+    background-color: var(--white-bg);
+    box-shadow: var(--box-shadow-light);
+    border-bottom: 3px solid var(--primary-color);
+}
+
+.page-title-internal {
+    font-family: var(--font-heading-sub);
+    font-weight: 700;
+    font-size: clamp(1.3rem, 4vw, 1.8rem);
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.home-button {
+    background-color: var(--primary-color);
+    color: var(--light-text);
+    text-decoration: none;
+    padding: var(--space-xs) var(--space-m);
+    border-radius: var(--border-radius-small);
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+}
+.home-button::before { /* Icona Home (Unicode) */
+    content: '🏠';
+    margin-right: var(--space-xs);
+    font-size: 1.1em;
+}
+
+.home-button:hover {
+    background-color: var(--primary-darker);
+    transform: scale(1.05);
+}
+
+/* --- Contenitore Principale Pagine Interne --- */
 .page-container {
-    max-width: 950px;
+    max-width: 900px; /* Ridotto per miglior leggibilità */
     margin: var(--space-xl) auto;
     padding: var(--space-l) var(--space-xl);
     background-color: var(--white-bg);
-    border-radius: var(--border-radius-large);
+    border-radius: var(--border-radius-medium);
     box-shadow: var(--box-shadow-medium);
-    /* Animazione ingresso */
     animation: fadeIn 0.8s ease-out forwards;
 }
 
-/* --- Titoli delle Sezioni (H2) --- */
+/* --- Titoli delle Sezioni (H2) Pagine Interne --- */
 .page-container h2 {
-    font-family: var(--font-heading);
-    color: var(--primary-color);
-    font-size: clamp(1.7rem, 4vw, 2.1rem); /* Responsive */
+    font-family: var(--font-heading-sub);
     font-weight: 700;
+    color: var(--primary-darker);
+    font-size: clamp(1.6rem, 3.5vw, 2rem);
     line-height: var(--line-height-heading);
     margin-bottom: var(--space-l);
     padding-bottom: var(--space-s);
-    border-bottom: 3px solid var(--secondary-color);
-    /* Animazione ingresso */
-    animation: slideInLeft 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s forwards;
-    opacity: 0; /* Nascosto inizialmente */
+    border-bottom: 2px solid var(--accent-color);
+    position: relative;
+    animation: slideInUp 0.7s ease-out 0.2s backwards;
+}
+.page-container h2::after { /* Elemento decorativo */
+    content: '';
+    position: absolute;
+    bottom: -7px; /* Posiziona sotto il bordo */
+    left: 0;
+    width: 50px;
+    height: 5px;
+    background-color: var(--secondary-accent-color);
+    border-radius: 3px;
 }
 
-/* --- Paragrafi e Liste --- */
+
+/* --- Paragrafi e Liste Pagine Interne --- */
 .page-container p,
 .page-container ul {
     margin-bottom: var(--space-m);
     font-size: 1.05rem;
     color: var(--medium-text);
-    /* Animazione ingresso */
-    animation: fadeInUp 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s forwards;
-    opacity: 0; /* Nascosto inizialmente */
+    animation: fadeInUp 0.7s ease-out 0.4s backwards;
 }
 
 .page-container ul {
-    list-style-type: '✓ '; /* Custom bullet point */
-    padding-left: var(--space-m);
+    list-style: none; /* Rimuove bullet di default */
+    padding-left: 0; /* Rimuove padding di default */
 }
 
 .page-container li {
     margin-bottom: var(--space-s);
-    padding: var(--space-xs) 0;
-    transition: background-color 0.3s ease; /* Transizione per hover */
-    border-radius: var(--border-radius-small);
-    /* Animazione ingresso elementi lista */
-    animation: fadeInUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-    opacity: 0;
-}
-.page-container li:hover {
-    background-color: #f1f1f1; /* Sfondo leggero su hover */
+    padding-left: var(--space-l); /* Spazio per il bullet custom */
+    position: relative; /* Per posizionare il ::before */
+    animation: fadeInUpList 0.6s ease-out backwards;
 }
 
-/* Applica ritardo crescente agli elementi della lista */
+.page-container li::before {
+    content: ''; /* Cerchio pieno */
+    position: absolute;
+    left: var(--space-xs);
+    top: calc(0.85em - 5px); /* Allineamento verticale (dipende da line-height e font-size) */
+    width: 10px;
+    height: 10px;
+    background-color: var(--secondary-accent-color);
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(var(--secondary-accent-color-rgb, 77, 182, 172), 0.5); /* Aggiungi ombra al bullet */
+}
+/* Per usare l'ombra con variabile colore, definire il colore RGB */
+:root { --secondary-accent-color-rgb: 77, 182, 172; }
+
+
+/* Animazione ritardata per elementi lista */
 .page-container li:nth-child(1) { animation-delay: 0.5s; }
 .page-container li:nth-child(2) { animation-delay: 0.6s; }
 .page-container li:nth-child(3) { animation-delay: 0.7s; }
 .page-container li:nth-child(4) { animation-delay: 0.8s; }
 .page-container li:nth-child(5) { animation-delay: 0.9s; }
-/* Continua se ci sono più elementi */
 
-/* Stili specifici per la sezione Approfondimenti */
-#approfondimenti ul {
-    list-style-type: '📚 '; /* Icona libro */
+/* Sezione approfondimenti con stile diverso per bullet */
+#approfondimenti ul li::before {
+    content: '❯'; /* Simbolo freccia */
+    font-weight: bold;
+    font-size: 1.2em;
+    background-color: transparent; /* Nessun cerchio */
+    box-shadow: none;
+    color: var(--accent-color);
+    top: calc(0.85em - 0.5em); /* Allineamento custom */
+    left: var(--space-xs);
 }
 
 
 /* --- Stili Specifici (Grassetto, Corsivo) --- */
 strong {
-    font-weight: 600;
-    color: var(--primary-darker); /* Teal più scuro per forte enfasi */
+    font-weight: 600; /* Più evidente */
+    color: var(--primary-darker);
 }
 
-em { /* Per titoli di opere */
+em {
     font-style: italic;
-    color: var(--medium-text);
-    font-weight: 400; /* Assicura non sia troppo bold */
+    color: #4A148C; /* Viola più scuro per enfasi */
+    font-weight: 400; /* Opzionale, se il font italic è troppo bold */
 }
 
 /* --- Navigazione tra Pagine (Pulsanti Prev/Next) --- */
@@ -225,163 +292,125 @@ em { /* Per titoli di opere */
     margin-top: var(--space-xl);
     padding-top: var(--space-l);
     border-top: 1px solid var(--border-color);
-    /* Animazione ingresso */
-    animation: fadeInUp 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1s forwards;
-    opacity: 0; /* Nascosto inizialmente */
+    animation: fadeInUp 0.7s ease-out 1s backwards;
 }
 
 .nav-button {
-    display: inline-flex; /* Per allineare testo/icona se ci fosse */
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     padding: var(--space-s) var(--space-l);
-    background-color: var(--secondary-color);
-    color: var(--light-text);
+    background-color: var(--accent-color);
+    color: var(--dark-text); /* Testo scuro su sfondo chiaro */
     text-decoration: none;
-    border-radius: 50px; /* Pill shape */
+    border-radius: 50px;
     font-weight: 600;
-    font-size: 1rem;
-    border: none;
+    font-size: 0.95rem;
+    border: 2px solid transparent;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    transition: all 0.3s ease;
     box-shadow: var(--box-shadow-light);
-    min-width: 120px; /* Larghezza minima */
+    min-width: 130px;
     text-align: center;
 }
 
-.nav-button:hover {
-    background-color: var(--secondary-darker);
-    transform: translateY(-3px) scale(1.03); /* Leggero sollevamento e ingrandimento */
+.nav-button:hover,
+.nav-button:focus {
+    background-color: var(--accent-darker);
+    color: var(--white-bg);
+    transform: translateY(-3px) scale(1.03);
     box-shadow: var(--box-shadow-medium);
+    border-color: var(--accent-darker);
 }
 
 .nav-button.prev {
-    background-color: var(--medium-text); /* Grigio per "Indietro" */
+    background-color: var(--medium-text);
+    color: var(--light-text);
 }
 
-.nav-button.prev:hover {
-    background-color: #444;
+.nav-button.prev:hover,
+.nav-button.prev:focus {
+    background-color: #424242; /* Grigio più scuro */
+    border-color: #424242;
 }
 
-/* Nasconde il contenitore del pulsante se non c'è link */
 .nav-button-container.hidden {
     visibility: hidden;
-    pointer-events: none; /* Impedisce interazione */
+    pointer-events: none;
 }
-
 
 /* --- Footer Globale --- */
 .main-footer {
     text-align: center;
-    margin-top: var(--space-xxl);
+    margin-top: auto; /* Spinge il footer in fondo se il contenuto è poco */
     padding: var(--space-l);
     font-size: 0.9rem;
     color: var(--medium-text);
-    border-top: 1px solid var(--border-color);
-    background-color: #f1f1f1; /* Sfondo leggermente diverso per il footer */
+    background-color: #E0E0E0; /* Grigio chiaro per il footer */
+    width: 100%;
 }
 
 /* --- Animazioni Keyframes --- */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
 }
-
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(25px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInUpList { /* Uguale a fadeInUp ma nome diverso per controllo separato se serve */
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideInUp { /* Per i titoli H2 interni */
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideInLeft { /* Non usato attualmente, ma disponibile */
+    from { opacity: 0; transform: translateX(-40px); }
+    to { opacity: 1; transform: translateX(0); }
 }
 
-@keyframes slideInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-40px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
 
 /* --- Media Queries per Responsive Design --- */
-@media (max-width: 992px) {
-    .page-container {
-        max-width: 90%; /* Più largo su tablet */
-    }
-}
-
 @media (max-width: 768px) {
-    html {
-        font-size: 15px; /* Leggermente più piccolo su mobile */
-    }
-    .main-header h1 {
-        margin-bottom: var(--space-xs);
-    }
-    .main-nav ul {
-       justify-content: center;
-    }
-     .main-nav li {
-        margin: var(--space-xs) 0.5rem; /* Meno margine laterale */
-    }
-    .main-nav a {
-        padding: 0.4rem 0.6rem;
+    html { font-size: 15px; }
+    .nav-button-home {
+        min-width: 160px;
         font-size: 0.9rem;
+        padding: calc(var(--space-s) * 0.9) calc(var(--space-m) * 0.9);
     }
-    .main-nav a::before { /* Rimuove o riduce underline su mobile se troppo invadente */
-        height: 1px;
-        width: 0; /* Nasconde underline */
+    .page-header {
+        padding: var(--space-m);
+        flex-direction: column;
+        gap: var(--space-s);
     }
-    .main-nav a:hover::before, .main-nav a.active::before {
-         width: 0;
-    }
-    .main-nav a.active { /* Evidenzia con sfondo */
-         background-color: rgba(255, 255, 255, 0.2);
-    }
-
+    .page-title-internal { text-align: center; }
+    .home-button { font-size: 0.85rem; }
 
     .page-container {
         margin: var(--space-l) var(--space-s);
-        padding: var(--space-m) var(--space-l);
-        border-radius: var(--border-radius-medium);
+        padding: var(--space-l);
     }
-    .page-container h2 {
-        margin-bottom: var(--space-m);
-        padding-bottom: var(--space-xs);
-    }
-
     .page-navigation {
         flex-direction: column;
-        align-items: stretch; /* Pulsanti a larghezza piena */
+        align-items: stretch;
     }
-    .nav-button {
-        width: 100%;
-        margin-bottom: var(--space-s);
-        padding: var(--space-s) var(--space-m);
-        font-size: 0.95rem;
-    }
-     .nav-button-container:last-child .nav-button {
-         margin-bottom: 0;
-     }
+    .nav-button { width: 100%; margin-bottom: var(--space-s); }
+    .nav-button-container:last-child .nav-button { margin-bottom: 0; }
 }
 
 @media (max-width: 480px) {
-    html {
-        font-size: 14px;
-    }
-    .page-container {
-         padding: var(--space-m);
-    }
-     .main-nav li {
-        margin: var(--space-xs) 0.3rem;
-    }
-     .main-nav a {
-        padding: 0.3rem 0.5rem;
-        font-size: 0.85rem;
-    }
+    html { font-size: 14px; }
+    .main-title-home { margin-bottom: var(--space-l); }
+    .homepage-nav { gap: var(--space-s); }
+    .nav-button-home { width: 100%; min-width: unset; } /* Full width su mobile piccolo */
+
+    .page-container { padding: var(--space-m); }
+    .page-container h2::after { width: 40px; height: 4px; bottom: -6px; }
+    .page-container li { padding-left: var(--space-m); }
+    .page-container li::before { left: 0; }
+    #approfondimenti ul li::before { left: 0; }
 }
